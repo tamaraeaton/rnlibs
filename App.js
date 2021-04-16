@@ -12,29 +12,19 @@ import Picker from './src/picker'
 
 // left out ios if statement
 const App = () => {
-  const requestPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: "Cool Photo App Camera Permission",
-          message:
-            "Cool Photo App needs access to your camera " +
-            "so you can take awesome pictures.",
-          buttonNeutral: "Ask Me Later",
-          buttonNegative: "Cancel",
-          buttonPositive: "OK"
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the camera");
-      } else {
-        console.log("Camera permission denied");
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
+PermissionsAndroid.request(
+  PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+  {
+    'title': 'Contacts',
+    'message': 'This app would like to view your contacts',
+    'buttonPositive': 'Please accept bare mortal'
+  }
+)
+.then(()=>{
+  Contacts.getAll().then(contacts=>{
+    console.log(contacts)
+  }).catch(err=> console.log(err))
+})
 
   // somewhere it says to use getAll at the beginning?
   const getContacts = () => {
@@ -50,10 +40,11 @@ const App = () => {
 
   return (
     <View>
-      <Button
+      <Picker />
+      {/* <Button
         title="get contacts"
         onPress={() => getContacts()}
-      />
+      /> */}
     </View>
   )
 }
