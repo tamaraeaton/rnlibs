@@ -19,6 +19,7 @@ const Picker = () => {
     // }
     const source = { uri: "data:image/jpeg;base64," + response.data}
     console.log(source)
+    console.log(response.data)
    setAvatar(response.uri);
   })
 
